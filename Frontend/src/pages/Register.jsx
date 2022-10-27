@@ -44,8 +44,9 @@ const Agreement = styled.span`
 `;
 
 const Button = styled.button`
-    width: 50%;
+    width: 40%;
     border: none;
+    margin: 7px;
     padding: 15px 20px;
     background-color: teal;
     color: white;
