@@ -64,8 +64,8 @@ const Login = () => {
                   <Input placeholder="Tài khoản" />
                   <Input placeholder="Mật khẩu" />
                   <Button>Đăng nhập</Button>
-                  <Link>Nhớ mật khẩu?</Link>
-                  <Link>Đăng ký tài khoản mới?</Link>
+                  <Link >Nhớ mật khẩu?</Link>
+                  <Link >Đăng ký tài khoản mới?</Link>
               </Form>
           </Wrapper>
       </Container>

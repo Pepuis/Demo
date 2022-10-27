@@ -52,9 +52,9 @@ const InfoContainer = styled.div`
     padding: 50px;
 `
 
-const Title = styled.h1
-const Desc = styled.p
-const Button = styled.button
+const Title = styled.h1``
+const Desc = styled.p``
+const Button = styled.button``
 
 const Slider = () => {
     return (
@@ -65,14 +65,14 @@ const Slider = () => {
             <Wrapper>
 
                 <ImgContainer>
-                    <Image src="https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcGRmbG93ZXJzZXRwcm9qZWN0MjItZ2xveS0wNS1qb2IxMTctMDFhLmpwZw.jpg"/>
+                    <Image src="https://images.rawpixel.com/image_png_700/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvam9iNjYxLWUwMDJfMS5wbmc.png"/>
                 </ImgContainer>
                 <InfoContainer>
                     <Title>Giảm giá hè</Title>
                     <Desc>Không phân biệt loại hoa! Giảm sốc 30% cho </Desc>
-                    <Button></Button>
+                    <Button>Xem ngay</Button>
                 </InfoContainer>
-                Slide
+              
             </Wrapper>
             <Arrow direction="right">
                 <ArrowRightOutlinedIcon />
