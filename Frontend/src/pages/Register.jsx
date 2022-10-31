@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
     width: 100vw;
-    height: 100vw;
+    height: 50vw;
     background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -46,7 +46,7 @@ const Agreement = styled.span`
 const Button = styled.button`
     width: 40%;
     border: none;
-    margin: 7px;
+    margin: 10px;
     padding: 15px 20px;
     background-color: teal;
     color: white;

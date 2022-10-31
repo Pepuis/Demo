@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     width: 100vw;
-    height: 100vw;
+    height: 50vw;
     background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
-    ), url("https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHgxNjExNzExLWltYWdlLWpvYjYyM18yLWwxcHFianlxLnBuZw.png") center;
+    ), url("https://images.pexels.com/photos/68507/spring-flowers-flowers-collage-floral-68507.jpeg?cs=srgb&dl=pexels-pixabay-68507.jpg&fm=jpg&_gl=1*itdw7h*_ga*ODE1MTMxODY5LjE2NjcxNDc3NDk.*_ga_8JE65Q40S6*MTY2NzE0Nzc0OS4xLjEuMTY2NzE0Nzc1Ni4wLjAuMA..") center;
     background-size: cover;
     display: flex;
     align-items: center;
@@ -19,16 +20,17 @@ const Wrapper = styled.div`
     width: 25%;
     padding: 20px;
     background-color: white;
+    //margin-top: -50vw;
 `;
 
 const Form = styled.form`
-display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
   `;
 
 const Title = styled.h1`
-font-size: 24px;
-  font-weight: 300;
+    font-size: 24px;
+    font-weight: 300;
 `;
 
 const Input = styled.input`
@@ -48,28 +50,37 @@ const Button = styled.button`
     margin-bottom: 10px;
 `;
 
-const Link = styled.a`
+const Links = styled.a`
     margin: 10px 0px;
-    font-size: 12px;
-    text-decoration: underline;
+    font-size: 14px;
+    //text-decoration: underline;
     cursor: pointer;
+    
 `;
 
 const Login = () => {
-  return (
-      <Container>
-          <Wrapper>
-              <Title>Đăng nhập</Title>
-              <Form>
-                  <Input placeholder="Tài khoản" />
-                  <Input placeholder="Mật khẩu" />
-                  <Button>Đăng nhập</Button>
-                  <Link >Nhớ mật khẩu?</Link>
-                  <Link >Đăng ký tài khoản mới?</Link>
-              </Form>
-          </Wrapper>
-      </Container>
-  )
+    return (
+        <Container>
+            <Wrapper>
+                <Title>Đăng nhập</Title>
+                <Form>
+                    <Input placeholder="Tài khoản" />
+                    <Input placeholder="Mật khẩu" />
+                    <Button>Đăng nhập</Button>
+                    <Link style={{ textDecorationLine: "none" }}>
+                        <Links>
+                            Nhớ mật khẩu?
+                        </Links>
+                    </Link>
+                    <Link to={"/register"} style={{ textDecorationLine: "none" }}>
+                        <Links>
+                            Đăng ký tài khoản mới?
+                        </Links>
+                    </Link>
+                </Form>
+            </Wrapper>
+        </Container>
+    )
 }
 
 export default Login

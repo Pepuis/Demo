@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import SearchIcon from '@mui/icons-material/Search';
 import { Badge } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     height: 60px;
@@ -78,8 +79,16 @@ const Navbar = () => {
                 </Center>
                 <Right>
 
-                    <MenuItem>Đăng ký</MenuItem>
-                    <MenuItem>Đăng nhập</MenuItem>
+                    <MenuItem>
+                        <Link to={"/register"} style={{textDecorationLine:"none"}}>
+                            Đăng ký
+                        </Link>
+                    </MenuItem>
+                    <MenuItem>
+                        <Link to={"/login"} style={{ textDecorationLine: "none" }} >
+                            Đăng nhập
+                        </Link>
+                    </MenuItem>
                     <MenuItem>
                         <Badge badgeContent={4} color="primary">
                             <ShoppingCartOutlinedIcon />
