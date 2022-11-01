@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { mobile } from "../Responsive";
 
 const Container = styled.div`
     width: 100vw;
-    height: 50vw;
+    height: 100vh;
     background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -12,15 +13,15 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    //${mobile({ height: "75%" ,})}
     
 `;
 
 const Wrapper = styled.div`
     width: 25%;
     padding: 20px;
-    background-color: white;
-    //margin-top: -50vw;
+    background-color: white;   
+    ${mobile({ width: "75%", marginTop: "10vw" })}
 `;
 
 const Form = styled.form`

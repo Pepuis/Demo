@@ -2,6 +2,7 @@
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@material-ui/icons';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { mobile } from '../Responsive';
 
 
 const Info = styled.div`
@@ -23,13 +24,14 @@ const Info = styled.div`
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    min-width: 280px;
+    min-width: 350px;
     height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: white;
     position: relative;
+    ${mobile({minWidth:"280px"})}
 
     &:hover ${Info}{
         opacity: 1;

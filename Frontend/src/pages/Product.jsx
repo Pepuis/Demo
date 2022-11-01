@@ -5,6 +5,7 @@ import CSKH from './../components/CSKH';
 import Footer from './../components/Footer';
 import Navbar from './../components/Navbar';
 import { Remove } from '@material-ui/icons';
+import { mobile } from '../Responsive';
 
 const Container = styled.div`
     
@@ -13,6 +14,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
     padding: 50px;
     display: flex;
+    ${mobile({ padding: "10px", flexDirection: "column" })}
 `;
 
 const ImgContainer = styled.div`
@@ -23,11 +25,13 @@ const Image = styled.img`
     width: 100%; 
     height: 90vh;
     object-fit: cover;
+    ${mobile({ height:"40vh" })}
 `;
 
 const InfoContainer = styled.div`
     flex: 1;
     padding: 0px 50px;
+    ${mobile({ padding: "10px" })}
 `;
 
 const Title = styled.h1`
@@ -48,6 +52,7 @@ const FilerContainer = styled.div`
     margin: 30px 0px;
     display: flex;
     justify-content: space-between;
+    ${mobile({ width: "100%" })}
 `;
 
 const Filter = styled.div`
@@ -83,6 +88,7 @@ const AddContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    ${mobile({ width: "100%" })}
 `;
 
 const AmountContainer = styled.div`
@@ -122,12 +128,12 @@ const Product = () => {
             <Announcement />
             <Wrapper>
                 <ImgContainer>
-                    <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+                    <Image src="https://images.fpt.shop/unsafe/fit-in/800x800/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2019/9/11/637037652463173144_11-xanh.png" />
                 </ImgContainer>
                 <InfoContainer>
-                    <Title>Ngay 20/10</Title>
-                    <Desc>1 su lang mang danh cho phai nu</Desc>
-                    <Price>$20</Price>
+                    <Title>IPHONE 13 PROMAX</Title>
+                    <Desc>Giảm 20%</Desc>
+                    <Price>$1120</Price>
                     <FilerContainer>
                         <Filter>
                             <FilterTitle>Màu</FilterTitle>
@@ -138,11 +144,11 @@ const Product = () => {
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
                             <FilterSize>
-                                <FilterSizeOption>A</FilterSizeOption>
-                                <FilterSizeOption>B</FilterSizeOption>
-                                <FilterSizeOption>C</FilterSizeOption>
-                                <FilterSizeOption>D</FilterSizeOption>
-                                <FilterSizeOption>E</FilterSizeOption>
+                                <FilterSizeOption>64GB</FilterSizeOption>
+                                <FilterSizeOption>128GB</FilterSizeOption>
+                                <FilterSizeOption>256GB</FilterSizeOption>
+                                <FilterSizeOption>512GB</FilterSizeOption>
+                                <FilterSizeOption>1T</FilterSizeOption>
                             </FilterSize>
                         </Filter>
                     </FilerContainer>

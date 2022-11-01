@@ -1,5 +1,9 @@
 import Login from "./pages/Login";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+    Routes,
+    Route,
+    BrowserRouter,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import ProductList from './pages/ProductList';
@@ -16,12 +20,24 @@ const App = () =>{
                     <Route path="productList" element={<ProductList />} />
                     <Route path="product" element={<Product />} />
                     <Route path="cart" element={<Cart />} />
-                    {/* <Route exact path="/home" component={Home} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} /> */}
+                    
                 </Route>
             </Routes>
         </BrowserRouter>
     )
+    // return (
+    //     <Router>
+    //         <Routes>
+    //             <Route exact path="/">
+    //                 <Home/> 
+    //                 <Route path="home" element={<Home />} />
+    //             </Route>
+    //             <Route path="/products">
+    //                 <ProductList />
+    //             </Route>
+                
+    //         </Routes>
+    //     </Router>
+    // )
 }
 export default App

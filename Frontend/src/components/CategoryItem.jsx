@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
+import { mobile } from "../Responsive";
 //import { useEffect } from 'react';
 
 const Container = styled.div`
@@ -13,6 +14,7 @@ const Image = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    ${mobile({ height: "20vh" })}
 `;
 
 const Info = styled.div`
@@ -46,6 +48,7 @@ const CategoryItem = ({ item }) => {
 
   return (
     <Container>
+      {/* <Link to={`/ProductList/${item.cat}`} style={{ textDecorationLine: "none" }}> */}
       <Image src={item.img} />
       <Info>
         <Title>{item.title}</Title>
@@ -55,6 +58,7 @@ const CategoryItem = ({ item }) => {
           </Link>
         </Button>
       </Info>
+      {/* </Link> */}
     </Container>
   )
 }
