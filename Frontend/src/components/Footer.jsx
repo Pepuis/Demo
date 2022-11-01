@@ -95,10 +95,9 @@ const Footer = () => {
                 <List>
                     <ListItem>Trang chủ</ListItem>
                     <ListItem>Giỏ hàng</ListItem>
-                    <ListItem>Hoa 20/10</ListItem>
-                    <ListItem>Hoa kỷ niệm</ListItem>
-                    <ListItem>Quà tặng kèm</ListItem>
-                    <ListItem>Tài khoản</ListItem>
+                    <ListItem>Samsung</ListItem>
+                    <ListItem>Iphone</ListItem>
+                    <ListItem>Oppo</ListItem>
                     <ListItem>Theo dõi đơn hàng</ListItem>
                     <ListItem>Danh sách yêu thích</ListItem>
                 </List>

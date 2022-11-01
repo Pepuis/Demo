@@ -71,16 +71,18 @@ const Navbar = () => {
                         <Input>
 
                         </Input>
-                        <SearchIcon style={{color:"gray", fontSize:16}}/>
+                        <SearchIcon style={{ color: "gray", fontSize: 16 }} />
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Logo>Flower Garden</Logo>
+                    <Link to={"/home"} style={{ textDecorationLine: "none" }}>
+                        <Logo>Flower Garden</Logo>
+                    </Link>
                 </Center>
                 <Right>
 
                     <MenuItem>
-                        <Link to={"/register"} style={{textDecorationLine:"none"}}>
+                        <Link to={"/register"} style={{ textDecorationLine: "none" }}>
                             Đăng ký
                         </Link>
                     </MenuItem>
@@ -90,9 +92,11 @@ const Navbar = () => {
                         </Link>
                     </MenuItem>
                     <MenuItem>
-                        <Badge badgeContent={4} color="primary">
-                            <ShoppingCartOutlinedIcon />
-                        </Badge>
+                        <Link to={"/cart"} style={{ textDecorationLine: "none" }} >
+                            <Badge badgeContent={4} color="primary">
+                                <ShoppingCartOutlinedIcon />
+                            </Badge>
+                        </Link>
                     </MenuItem>
                 </Right>
             </Wrapper>

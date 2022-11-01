@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 //import { useEffect } from 'react';
 
-const Container= styled.div`
+const Container = styled.div`
     flex: 1;
     margin: 3px;
     height: 70vh;
@@ -40,16 +41,20 @@ const Button = styled.button`
     font-weight: 600;
 `;
 
-const CategoryItem = ({item}) => {
-    
-    
+const CategoryItem = ({ item }) => {
+
+
   return (
     <Container>
-        <Image src={item.img}/>
-        <Info>
-          <Title>{item.title}</Title>
-          <Button>MUA NGAY</Button>
-        </Info>
+      <Image src={item.img} />
+      <Info>
+        <Title>{item.title}</Title>
+        <Button>
+          <Link to={"/ProductList"} style={{ textDecorationLine: "none" }}>
+            MUA NGAY
+          </Link>
+        </Button>
+      </Info>
     </Container>
   )
 }

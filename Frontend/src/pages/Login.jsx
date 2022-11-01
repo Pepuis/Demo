@@ -66,13 +66,17 @@ const Login = () => {
                 <Form>
                     <Input placeholder="Tài khoản" />
                     <Input placeholder="Mật khẩu" />
-                    <Button>Đăng nhập</Button>
-                    <Link style={{ textDecorationLine: "none" }}>
+                    <Button>
+                        <Link to={"/Home"} style={{ textDecorationLine: "none", color:"white"}}>
+                            Đăng nhập
+                        </Link>
+                    </Button>
+                    <Link style={{ textDecorationLine: "none", color: "black" }}>
                         <Links>
                             Nhớ mật khẩu?
                         </Links>
                     </Link>
-                    <Link to={"/register"} style={{ textDecorationLine: "none" }}>
+                    <Link to={"/register"} style={{ textDecorationLine: "none", color: "black" }}>
                         <Links>
                             Đăng ký tài khoản mới?
                         </Links>

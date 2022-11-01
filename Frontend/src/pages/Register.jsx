@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100vw;
@@ -69,7 +70,11 @@ const Register = () => {
                     <Agreement>
                         Tôi đồng ý với mọi <b> CHÍNH SÁCH BẢO MẬT</b>
                     </Agreement>
-                    <Button>Đăng ký</Button>
+                    <Button>
+                        <Link to={"/Login"} style={{ textDecorationLine: "none", color: "white" }}>
+                            Đăng ký
+                        </Link>
+                    </Button>
                 </Form>
             </Wrapper>
         </Container>

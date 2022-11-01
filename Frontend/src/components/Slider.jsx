@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 //import {sliderItems} from "../data.js"
 
 const Container = styled.div`
@@ -41,7 +42,7 @@ const Slide = styled.div`
     height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #${props=>props.bg};
+    background-color: #${props => props.bg};
 `;
 
 const ImgContainer = styled.div`
@@ -79,10 +80,10 @@ const Button = styled.button`
 const Slider = () => {
 
     const [slideIndex, setSlideIndex] = useState(0);
-    const [data,setData]=useState([]);
-  
-    useEffect(() =>{
-        async function fetchList(){
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        async function fetchList() {
             const requesUrl = 'https://635a2361ff3d7bddb9aff1b9.mockapi.io/item';
             const response = await fetch(requesUrl);
             const responseJSON = await response.json();
@@ -93,28 +94,28 @@ const Slider = () => {
         }
 
         fetchList();
-        
-    }, []);
-   
-    console.log(data);
-    const handleClick = (direction) =>{
 
-        if(direction === "left"){
-            setSlideIndex(slideIndex > 0 ? slideIndex  - 1 : 9);
-        }else{
+    }, []);
+
+    console.log(data);
+    const handleClick = (direction) => {
+
+        if (direction === "left") {
+            setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 9);
+        } else {
             setSlideIndex(slideIndex < 9 ? slideIndex + 1 : 0);
         }
     };
-   
-    
+
+
     return (
         <Container>
-            <Arrow direction="left" onClick={()=>handleClick("left")}>
-                <ArrowLeftOutlined />   
+            <Arrow direction="left" onClick={() => handleClick("left")}>
+                <ArrowLeftOutlined />
             </Arrow>
-            <Wrapper slideIndex={slideIndex}>        
+            <Wrapper slideIndex={slideIndex}>
                 {
-                    data.map((item) =>{
+                    data.map((item) => {
                         return (
                             <Slide bg={item.bg} key={item.slideIndex}>
                                 <ImgContainer>
@@ -123,22 +124,26 @@ const Slider = () => {
                                 <InfoContainer>
                                     <Title>{item.title}</Title>
                                     <Desc>{item.desc}</Desc>
-                                    <Button>XEM NGAY</Button>
+                                    <Button>
+                                        <Link to={"/ProductList"} style={{ textDecorationLine: "none" }}>
+                                            XEM NGAY
+                                        </Link>
+                                    </Button>
                                 </InfoContainer>
                             </Slide>
                         )
                     })
                 }
 
-                
+
             </Wrapper>
             <Arrow direction="right" onClick={() => handleClick("right")}>
                 <ArrowRightOutlined />
             </Arrow>
         </Container>
     )
-    
-    
+
+
 }
 
 export default Slider
