@@ -113,6 +113,15 @@ const authController = {
       res.status(200).json({ accessToken: newAccessToken });
     });
   },
+
+  //logout
+  userLogout: async (req, res) => {
+    res.clearCookie("refreshToken");
+    refreshTokens = refreshTokens.filter(
+      (token) => token != req.cookies.refreshToken
+    );
+    res.status(200).json("Đăng xuất thành công");
+  },
 };
 
 module.exports = authController;
