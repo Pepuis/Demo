@@ -4,11 +4,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Badge } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from "react-router-dom";
-import {mobile} from "../Responsive"
+import { mobile } from "../Responsive"
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
     height: 60px;
-    ${mobile({height:"50px"})}
+    ${mobile({ height: "50px" })}
 `;
 
 const Wrapper = styled.div`
@@ -66,17 +67,19 @@ const MenuItem = styled.div`
     font-size: 14px;
     cursor: pointer;
     margin-left: 25px;
-    ${mobile({ fontSize: "12px", marginLeft:"10px" })}
+    ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
 const Navbar = () => {
+
+    const user = useSelector((state) => state.auth.login.currentUser);
     return (
         <Container>
             <Wrapper>
                 <Left>
                     <Language>EN</Language>
                     <SearchContainer>
-                        <Input placeholder="Search"/>
+                        <Input placeholder="Search" />
                         <SearchIcon style={{ color: "gray", fontSize: 16 }} />
                     </SearchContainer>
                 </Left>
@@ -87,16 +90,26 @@ const Navbar = () => {
                 </Center>
                 <Right>
 
-                    <MenuItem>
-                        <Link to={"/register"} style={{ textDecorationLine: "none" }}>
-                            Đăng ký
-                        </Link>
-                    </MenuItem>
-                    <MenuItem>
-                        <Link to={"/login"} style={{ textDecorationLine: "none" }} >
-                            Đăng nhập
-                        </Link>
-                    </MenuItem>
+
+                    {user ? (
+                        <>
+                            <MenuItem>Hi, <span> {user.username}</span></MenuItem>
+                        </>
+                    ) : (
+                        <>
+                            <MenuItem>
+                                <Link to={"/register"} style={{ textDecorationLine: "none" }}>
+                                    Đăng ký
+                                </Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link to={"/login"} style={{ textDecorationLine: "none" }} >
+                                    Đăng nhập
+                                </Link>
+                            </MenuItem>
+                        </>
+                    )}
+
                     <MenuItem>
                         <Link to={"/cart"} style={{ textDecorationLine: "none" }} >
                             <Badge badgeContent={4} color="primary">
