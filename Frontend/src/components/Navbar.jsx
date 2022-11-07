@@ -3,9 +3,12 @@ import styled from 'styled-components'
 import SearchIcon from '@mui/icons-material/Search';
 import { Badge } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { mobile } from "../Responsive"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from '../redux/apiRequest';
+import { createAxios } from "../../src/createInstance";
+import { logoutSuccess } from '../redux/authSlice';
 
 const Container = styled.div`
     height: 60px;
@@ -70,9 +73,25 @@ const MenuItem = styled.div`
     ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
-const Navbar = () => {
+const LoginName = styled.span`
+    color: coral;
+    font-size: 16px;
+`;
 
-    const user = useSelector((state) => state.auth.login.currentUser);
+const Navbar = () => {
+    const user = useSelector((state) => state.auth.login?.currentUser);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const accessToken = user?.accessToken;
+    const id = user?._id;
+    let axiosJWT = createAxios(user, dispatch, logoutSuccess);
+
+    const handleLogout = () => {
+        logOut(dispatch, navigate, id, accessToken, axiosJWT);
+    }
+
+
     return (
         <Container>
             <Wrapper>
@@ -84,7 +103,7 @@ const Navbar = () => {
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Link to={"/home"} style={{ textDecorationLine: "none" }}>
+                    <Link to={"/"} style={{ textDecorationLine: "none" }}>
                         <Logo>Smart 4.0</Logo>
                     </Link>
                 </Center>
@@ -93,7 +112,8 @@ const Navbar = () => {
 
                     {user ? (
                         <>
-                            <MenuItem>Hi, <span> {user.username}</span></MenuItem>
+                            <MenuItem> <LoginName>Hi, {user.username}</LoginName></MenuItem>
+                            <MenuItem > <Link onClick={handleLogout}>Đăng xuất</Link></MenuItem>
                         </>
                     ) : (
                         <>

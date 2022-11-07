@@ -27,12 +27,12 @@ const authSlice = createSlice({
       state.login.error = true;
       state.login.isFetching = false;
     },
+    
     registerStart: (state) => {
       state.register.isFetching = true;
     },
     registerSuccess: (state, action) => {
       state.register.isFetching = false;
-      // tra ve thong tin nguoi dung
       state.register.error = false;
       state.register.success = true;
     },
@@ -40,6 +40,20 @@ const authSlice = createSlice({
       state.register.isFetching = false;
       state.register.error = true;
       state.register.success = false;
+    },
+
+    
+    logoutStart: (state) => {
+      state.login.isFetching = true;
+    },
+    logoutSuccess: (state) => {
+      state.login.isFetching = false;
+      state.login.currentUser = null;
+      state.login.error = false;
+    },
+    logoutFailed: (state) => {
+      state.login.isFetching = false;
+      state.login.error = true;
     },
   },
 });
@@ -51,6 +65,9 @@ export const {
   registerStart,
   registerSuccess,
   registerFailed,
+  logoutStart,
+  logoutSuccess,
+  logoutFailed,
 } = authSlice.actions;
 
 export default authSlice.reducer;

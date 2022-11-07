@@ -3,6 +3,9 @@ import {
   loginFailed,
   loginStart,
   loginSuccess,
+  logoutFailed,
+  logoutStart,
+  logoutSuccess,
   registerFailed,
   registerStart,
   registerSuccess,
@@ -29,5 +32,19 @@ export const registerUser = async (user, dispatch, navigate) => {
     navigate("/login");
   } catch (err) {
     dispatch(registerFailed());
+  }
+};
+
+export const logOut = async (dispatch, id, navigate, accessToken, axiosJWT) => {
+  dispatch(logoutStart());
+  try {
+    await axiosJWT.post("/v1/auth/logout", id, {
+      headers: { token: `Bearer ${accessToken}` },
+    });
+    dispatch(logoutSuccess());
+    //navigate("/login");
+  } catch (err) {
+    dispatch(logoutFailed());
+    //console.log(err);
   }
 };
