@@ -1,6 +1,9 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { mobile } from "../Responsive";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../redux/apiRequest';
 
 const Container = styled.div`
     width: 100vw;
@@ -13,7 +16,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    //${mobile({ height: "75%" ,})}
+    //${mobile({ height: "75%", })}
     
 `;
 
@@ -60,17 +63,31 @@ const Links = styled.a`
 `;
 
 const Login = () => {
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const newUser = {
+            username: username,
+            password: password
+        };
+        loginUser(newUser, dispatch, navigate);
+    }
     return (
         <Container>
             <Wrapper>
                 <Title>Đăng nhập</Title>
-                <Form>
-                    <Input placeholder="Tài khoản" />
-                    <Input placeholder="Mật khẩu" />
+                <Form onSubmit={handleLogin}>
+                    <Input placeholder="Tài khoản" onChange={(e) => setUsername(e.target.value)} />
+                    <Input type="password" placeholder="Mật khẩu" onChange={(e) => setPassword(e.target.value)} />
                     <Button>
-                        <Link to={"/Home"} style={{ textDecorationLine: "none", color:"white"}}>
-                            Đăng nhập
-                        </Link>
+                        {/* <Link to={"/Home"} style={{ textDecorationLine: "none", color: "white" }}> */}
+                        Đăng nhập
+                        {/* </Link> */}
                     </Button>
                     <Link style={{ textDecorationLine: "none", color: "black" }}>
                         <Links>

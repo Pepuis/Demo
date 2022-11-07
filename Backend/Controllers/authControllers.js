@@ -22,7 +22,7 @@ const authController = {
       const user = await newUser.save();
       res.status(200).json(user);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   },
 
@@ -55,7 +55,7 @@ const authController = {
     try {
       const user = await User.findOne({ username: req.body.username });
       if (!user) {
-        res.status(404).json("Sai username!");
+        return res.status(404).json("Sai username!");
       }
       const validPassword = await bcrypt.compare(
         req.body.password,
@@ -63,7 +63,7 @@ const authController = {
       );
 
       if (!validPassword) {
-        res.status(404).json("Sai password!");
+        return res.status(404).json("Sai password!");
       }
 
       if (user && validPassword) {
@@ -82,7 +82,7 @@ const authController = {
         res.status(200).json({ ...others, accessToken });
       }
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   },
 

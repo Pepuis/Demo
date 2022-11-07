@@ -8,13 +8,13 @@ const middlewareController = {
       const accessToken = token.split(" ")[1];
       jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, (err, user) => {
         if (err) {
-          res.status(403).json("Token không đúng");
+          return res.status(403).json("Token không đúng");
         }
         req.user = user;
         next();
       });
     } else {
-      res.status(401).json("Bạn chưa có token hoặc bạn chưa chứng thực");
+      return res.status(401).json("Bạn chưa có token hoặc bạn chưa chứng thực");
     }
   },
 
@@ -23,7 +23,7 @@ const middlewareController = {
       if (req.user.id == req.params.id || req.user.admin) {
         next();
       } else {
-        res.status(403).json("Bạn không thể xoá người khác");
+        return res.status(403).json("Bạn không thể xoá người khác");
       }
     });
   },
