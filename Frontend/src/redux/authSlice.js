@@ -7,6 +7,11 @@ const authSlice = createSlice({
       isFetching: false,
       error: false,
     },
+    register: {
+      isFetching: false,
+      error: false,
+      success: false,
+    },
   },
   reducers: {
     loginStart: (state) => {
@@ -22,9 +27,30 @@ const authSlice = createSlice({
       state.login.error = true;
       state.login.isFetching = false;
     },
+    registerStart: (state) => {
+      state.register.isFetching = true;
+    },
+    registerSuccess: (state, action) => {
+      state.register.isFetching = false;
+      // tra ve thong tin nguoi dung
+      state.register.error = false;
+      state.register.success = true;
+    },
+    registerFailed: (state) => {
+      state.register.isFetching = false;
+      state.register.error = true;
+      state.register.success = false;
+    },
   },
 });
 
-export const { loginStart, loginFailed, loginSuccess } = authSlice.actions;
+export const {
+  loginStart,
+  loginFailed,
+  loginSuccess,
+  registerStart,
+  registerSuccess,
+  registerFailed,
+} = authSlice.actions;
 
 export default authSlice.reducer;

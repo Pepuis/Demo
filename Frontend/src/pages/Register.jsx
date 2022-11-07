@@ -1,6 +1,9 @@
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { mobile } from "../Responsive";
+import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { registerUser } from "../redux/apiRequest";
 
 const Container = styled.div`
     width: 100vw;
@@ -18,10 +21,10 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-    width: 40%;
-    padding: 20px;
+    width: 20%;
+    padding: 25px;
     background-color: white;
-    ${mobile({ width: "75%", marginTop:"-10vh"})}
+    ${mobile({ width: "75%", marginTop: "-10vh" })}
 `;
 
 const Form = styled.form`
@@ -58,24 +61,40 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const newUser = {
+            username: username,
+            password: password,
+            email: email
+        };
+        registerUser(newUser, dispatch, navigate);
+    }
     return (
         <Container>
             <Wrapper>
                 <Title>Đăng ký</Title>
-                <Form>
-                    <Input placeholder="Tên" />
-                    <Input placeholder="Họ" />
-                    <Input placeholder="Tài khoản" />
-                    <Input placeholder="Email" />
-                    <Input placeholder="Mật khẩu" />
-                    <Input placeholder="Nhập lại mật khẩu" />
+                <Form onSubmit={handleRegister}>
+                    {/* <Input placeholder="Tên" />
+                    <Input placeholder="Họ" /> */}
+                    <Input placeholder="Tài khoản" onChange={(e) => setUsername(e.target.value)} />
+                    <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                    <Input type="password" placeholder="Mật khẩu" onChange={(e) => setPassword(e.target.value)} />
+                    {/* <Input placeholder="Nhập lại mật khẩu" /> */}
                     <Agreement>
                         Tôi đồng ý với mọi <b> CHÍNH SÁCH BẢO MẬT</b>
                     </Agreement>
                     <Button>
-                        <Link to={"/Login"} style={{ textDecorationLine: "none", color: "white" }}>
-                            Đăng ký
-                        </Link>
+                        {/* <Link to={"/Login"} style={{ textDecorationLine: "none", color: "white" }}> */}
+                        Đăng ký
+                        {/* </Link> */}
                     </Button>
                 </Form>
             </Wrapper>
