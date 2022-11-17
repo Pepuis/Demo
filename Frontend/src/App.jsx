@@ -2,28 +2,29 @@ import Login from "./pages/Login";
 import {
     Routes,
     Route,
-    BrowserRouter,
+    BrowserRouter as Router,
 } from "react-router-dom";
+
+
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import ProductList from './pages/ProductList';
 import Product from './pages/Product';
 import Cart from "./pages/Cart";
-const App = () =>{
+const App = () => {
     return (
-        <BrowserRouter>
+        <Router>
             <Routes>
                 <Route path="/">
                     <Route index element={<Home />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="register" element={<Register/>}/>
-                    <Route path="productList" element={<ProductList />} />
-                    <Route path="product" element={<Product />} />
+                    <Route path="/products/:category" element={<ProductList />} />
+                    <Route path="/product/:id" element={<Product />} />
                     <Route path="cart" element={<Cart />} />
-                    
+                    <Route path="login" element={<Login />} />
+                    <Route path="register" element={<Register />} />
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </Router>
     )
     // return (
     //     <Router>
@@ -35,7 +36,7 @@ const App = () =>{
     //             <Route path="/products">
     //                 <ProductList />
     //             </Route>
-                
+
     //         </Routes>
     //     </Router>
     // )

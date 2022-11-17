@@ -82,7 +82,9 @@ const authController = {
         res.status(200).json({ ...others, accessToken });
       }
     } catch (err) {
+      console.log(err);
       return res.status(500).json(err);
+      
     }
   },
 

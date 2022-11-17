@@ -8,7 +8,7 @@ const middlewareController = {
       const accessToken = token.split(" ")[1];
       jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, (err, user) => {
         if (err) {
-          return res.status(403).json("Token không đúng");
+          return res.status(403).json("Bạn không có quyền này");
         }
         req.user = user;
         next();
@@ -18,12 +18,22 @@ const middlewareController = {
     }
   },
 
-  verifyTokenAndAdminAuth: (req, res, next) => {
+  verifyTokenAndUserAuth: (req, res, next) => {
     middlewareController.verifyToken(req, res, () => {
-      if (req.user.id == req.params.id || req.user.admin) {
+      if (req.user.id === req.params.id || req.user.isAdmin) {
         next();
       } else {
-        return res.status(403).json("Bạn không thể xoá người khác");
+        return res.status(403).json("Bạn không có quyền này!");
+      }
+    });
+  },
+  
+  verifyTokenAndAdminAuth: (req, res, next) => {
+    middlewareController.verifyToken(req, res, () => {
+      if (req.user.admin) {
+        next();
+      } else {
+        return res.status(403).json("Bạn không có quyền này!");
       }
     });
   },

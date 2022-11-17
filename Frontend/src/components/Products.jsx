@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Product from './Product';
+import { axios } from 'axios';
 
 
 const Container = styled.div`
@@ -10,9 +11,24 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
-const Products = () => {
+const Products = ({cat,filters,sort}) => {
+    
+    //console.log(cat,filters,sort);
 
+    const[products,setProducts]=useState([]);
+    const[filteredProducts,setFilteredProducts]=useState([]);
+    
     const [data, setData] = useState([]);
+
+    useEffect(()=>{
+        const getProducts = async()=>{
+            try {
+                const res = await axios.get("http://localhost:8000/Backend/products")
+            } catch (err) {
+                
+            }
+        }
+    })
 
     useEffect(() => {
         async function fetchList() {

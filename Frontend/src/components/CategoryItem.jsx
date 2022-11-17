@@ -48,17 +48,15 @@ const CategoryItem = ({ item }) => {
 
   return (
     <Container>
-      {/* <Link to={`/ProductList/${item.cat}`} style={{ textDecorationLine: "none" }}> */}
-      <Image src={item.img} />
-      <Info>
-        <Title>{item.title}</Title>
-        <Button>
-          <Link to={"/ProductList"} style={{ textDecorationLine: "none" }}>
+      <Link to={`/products/${item.cat}`} style={{ textDecorationLine: "none" }}>
+        <Image src={item.img} />
+        <Info>
+          <Title>{item.title}</Title>
+          <Button>
             MUA NGAY
-          </Link>
-        </Button>
-      </Info>
-      {/* </Link> */}
+          </Button>
+        </Info>
+      </Link>
     </Container>
   )
 }
