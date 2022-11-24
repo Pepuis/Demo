@@ -27,7 +27,7 @@ const authSlice = createSlice({
       state.login.error = true;
       state.login.isFetching = false;
     },
-    
+
     registerStart: (state) => {
       state.register.isFetching = true;
     },
@@ -42,7 +42,6 @@ const authSlice = createSlice({
       state.register.success = false;
     },
 
-    
     logoutStart: (state) => {
       state.login.isFetching = true;
     },

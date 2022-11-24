@@ -31,7 +31,7 @@ const Container = styled.div`
     justify-content: center;
     background-color: white;
     position: relative;
-    ${mobile({minWidth:"280px"})}
+    ${mobile({ minWidth: "280px" })}
 
     &:hover ${Info}{
         opacity: 1;
@@ -83,7 +83,7 @@ const Product = ({ item }) => {
                     </Link>
                 </Icon>
                 <Icon>
-                    <Link to={"/Product"} style={{ textDecorationLine: "none" }}>
+                    <Link to={`/Product/${item._id}`} style={{ textDecorationLine: "none" }}>
                         <SearchOutlined />
                     </Link>
                 </Icon>

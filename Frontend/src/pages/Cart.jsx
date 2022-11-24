@@ -5,6 +5,17 @@ import Announcement from "../components/Announcement"
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar"
 import { mobile } from "../Responsive";
+import { useSelector } from 'react-redux';
+import StripeCheckout from "react-stripe-checkout";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { userRequest } from "../requestMethod";
+import { useNavigate } from "react-router-dom";
+
+
+
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div`
 
@@ -77,7 +88,7 @@ const ProductColor = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;    
-    background-color: ${props=>props.color};
+    background-color: ${props => props.color};
     
 `;
 const PriceDetail = styled.div`
@@ -128,8 +139,8 @@ const SummaryItem = styled.div`
     margin: 30px 0px;
     display: flex;
     justify-content: space-between;
-    font-weight: ${props=>props.type === "total" && "500"};
-    font-size: ${props=>props.type === "total" && "24px"};
+    font-weight: ${props => props.type === "total" && "500"};
+    font-size: ${props => props.type === "total" && "24px"};
 `;
 
 const SummaryItemText = styled.span`
@@ -150,6 +161,30 @@ const Button = styled.button`
 
 
 const Cart = () => {
+
+    const cart = useSelector((state) => state.cart);
+    const [stripeToken, setStripeToken] = useState(null);
+    const navigate = useNavigate();
+
+    const onToken = (token) => {
+        setStripeToken(token);
+    };
+
+    useEffect(() => {
+        const makeRequest = async () => {
+            try {
+                const res = await userRequest.post("/checkout/payment", {
+                    tokenId: stripeToken.id,
+                    amount: cart.total * 100,
+                });
+                navigate.push("/success", { 
+                    stripeData: res.data, 
+                    products: cart, });
+            } catch { }
+        };
+        stripeToken && makeRequest();
+    }, [stripeToken, cart.total, navigate]);
+    //console.log(stripeToken);
     return (
         <Container>
             <Navbar />
@@ -163,49 +198,34 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                        <Product>
-                            <ProductDetail>
-                                <Image src="https://images.fpt.shop/unsafe/fit-in/800x800/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2019/9/11/637037652463173144_11-xanh.png" />
-                                <Details>
-                                    <ProductName><b>Tên sản phẩm:</b> AAA</ProductName>
-                                    {/* <ProductID><b>Mã:</b>123</ProductID> */}
-                                    <ProductColor color="black"/>
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add/>
-                                    <ProductAmount>1</ProductAmount>
-                                    <Remove/>
-                                </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
-                        <Hr/>
-                        <Product>
-                            <ProductDetail>
-                                <Image src="https://images.fpt.shop/unsafe/fit-in/800x800/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2019/9/11/637037652463173144_11-xanh.png" />
-                                <Details>
-                                    <ProductName><b>Tên sản phẩm:</b> AAA</ProductName>
-                                    {/* <ProductID><b>Mã:</b>123</ProductID> */}
-                                    <ProductColor color="black" />
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add />
-                                    <ProductAmount>1</ProductAmount>
-                                    <Remove />
-                                </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
+                        {cart.products.map((product) => (
+                            <Product>
+                                <ProductDetail>
+                                    <Image src={product.img} />
+                                    <Details>
+                                        <ProductName><b>Tên sản phẩm:</b> {product.title}</ProductName>
+                                        {/* <ProductID><b>Mã:</b>123</ProductID> */}
+                                        <ProductColor color={product.color} />
+                                    </Details>
+                                </ProductDetail>
+                                <PriceDetail>
+                                    <ProductAmountContainer>
+                                        <Add />
+                                        <ProductAmount>{product.quantity}</ProductAmount>
+                                        <Remove />
+                                    </ProductAmountContainer>
+                                    <ProductPrice>{product.price * product.quantity} VNĐ</ProductPrice>
+                                </PriceDetail>
+                            </Product>
+                        ))}
+                        <Hr />
+
                     </Info>
                     <Summary>
                         <SummaryTitle>Chi tiết hoá đơn</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Tổng tiền: </SummaryItemText>
-                            <SummaryItemPrice>$60</SummaryItemPrice>
+                            <SummaryItemPrice>{cart.total} VNĐ</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Giảm: </SummaryItemText>
@@ -213,9 +233,20 @@ const Cart = () => {
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText >Cần thanh toán: </SummaryItemText>
-                            <SummaryItemPrice>$30</SummaryItemPrice>
+                            <SummaryItemPrice>{cart.total} VNĐ</SummaryItemPrice>
                         </SummaryItem>
-                        <Button>Thanh toán ngay</Button>
+                        <StripeCheckout
+                            name="Flower Store"
+                            image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                            billingAddress
+                            shippingAddress
+                            description={`Số tiền bạn cần thanh toán là $${cart.total}`}
+                            amount={cart.total * 100}
+                            token={onToken}
+                            stripeKey={KEY}
+                        >
+                            <Button>CHECKOUT NOW</Button>
+                        </StripeCheckout>
                     </Summary>
                 </Bottom>
             </Wrapper>

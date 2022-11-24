@@ -34,7 +34,7 @@ const authController = {
         admin: user.admin,
       },
       process.env.JWT_ACCESS_KEY,
-      { expiresIn: "30s" }
+      { expiresIn: "35d" }
     );
   },
 
@@ -84,7 +84,6 @@ const authController = {
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
-      
     }
   },
 

@@ -1,4 +1,5 @@
-import axios from "axios";
+//import axios from "axios";
+import { publicRequest, userRequest } from "./../requestMethod";
 import {
   loginFailed,
   loginStart,
@@ -14,7 +15,7 @@ import {
 export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
-    const res = await axios.post("/v1/auth/login", user);
+    const res = await publicRequest.post("/auth/login", user);
     // .then(res => console.log("res: ", res))
     // .then(err => console.log(err));
     dispatch(loginSuccess(res.data));
@@ -27,7 +28,7 @@ export const loginUser = async (user, dispatch, navigate) => {
 export const registerUser = async (user, dispatch, navigate) => {
   dispatch(registerStart());
   try {
-    await axios.post("/v1/auth/register", user);
+    await publicRequest.post("/auth/register", user);
     dispatch(registerSuccess());
     navigate("/login");
   } catch (err) {
@@ -38,7 +39,7 @@ export const registerUser = async (user, dispatch, navigate) => {
 export const logOut = async (dispatch, id, navigate, accessToken, axiosJWT) => {
   dispatch(logoutStart());
   try {
-    await axiosJWT.post("/v1/auth/logout", id, {
+    await userRequest.post("/auth/logout", id, {
       headers: { token: `Bearer ${accessToken}` },
     });
     dispatch(logoutSuccess());

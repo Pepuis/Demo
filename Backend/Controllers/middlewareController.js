@@ -3,10 +3,10 @@ const jwt = require("jsonwebtoken");
 const middlewareController = {
   //verifyToken
   verifyToken: (req, res, next) => {
-    const token = req.headers.token;
-    if (token) {
-      const accessToken = token.split(" ")[1];
-      jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, (err, user) => {
+    const authHeader = req.headers.token;
+    if (authHeader) {
+      const token = authHeader.split(" ")[1];
+      jwt.verify(token, process.env.JWT_ACCESS_KEY, (err, user) => {
         if (err) {
           return res.status(403).json("Bạn không có quyền này");
         }
@@ -19,7 +19,7 @@ const middlewareController = {
   },
 
   verifyTokenAndUserAuth: (req, res, next) => {
-    middlewareController.verifyToken(req, res, () => {
+    verifyToken(req, res, () => {
       if (req.user.id === req.params.id || req.user.isAdmin) {
         next();
       } else {
@@ -27,7 +27,7 @@ const middlewareController = {
       }
     });
   },
-  
+
   verifyTokenAndAdminAuth: (req, res, next) => {
     middlewareController.verifyToken(req, res, () => {
       if (req.user.admin) {

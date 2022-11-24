@@ -1,33 +1,32 @@
 const middlewareController = require("../Controllers/middlewareController");
-const productController = require("../Controllers/productController");
+const categoryController = require("../Controllers/CategoryController");
 
 const router = require("express").Router();
 
-//Add product
+//Add
 router.post(
   "/",
   middlewareController.verifyTokenAndAdminAuth,
-  productController.createProduct
+  categoryController.createCategory
 );
 
-//Del product
+//Del
 router.delete(
   "/:id",
   middlewareController.verifyTokenAndAdminAuth,
-  productController.deleteProduct
+  categoryController.deleteCategory
 );
 
-//Upd product
+//Upd
 router.put(
   "/:id",
   middlewareController.verifyTokenAndAdminAuth,
-  productController.updateProduct
+  categoryController.updateCategory
 );
 
 //Get theo id
-router.get("/find/:id", productController.getProduct);
+router.get("/find/:id", categoryController.getCategory);
 
-//Get all
-router.get("/", productController.getAllProduct);
-
+//get all
+router.get("/", categoryController.getAllCate);
 module.exports = router;

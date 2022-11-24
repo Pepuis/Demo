@@ -7,7 +7,10 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
-const { use } = require("./routes/auth");
+const orderRoute = require("./routes/order");
+const stripeRoute = require("./routes/stripe");
+const cateRoute = require("./routes/category");
+//const { use } = require("./routes/auth");
 
 dotenv.config();
 const app = express();
@@ -25,6 +28,9 @@ app.use("/v1/auth", authRoute);
 app.use("/v1/user", userRoute);
 app.use("/v1/product", productRoute);
 app.use("/v1/cart", cartRoute);
+app.use("/v1/order", orderRoute);
+app.use("/v1/checkout", stripeRoute);
+app.use("/v1/cate", cateRoute);
 
 app.listen(8000, () => {
   console.log("Server is running");

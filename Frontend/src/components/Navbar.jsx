@@ -5,10 +5,11 @@ import { Badge } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link, useNavigate } from "react-router-dom";
 import { mobile } from "../Responsive"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logOut } from '../redux/apiRequest';
 import { createAxios } from "../../src/createInstance";
 import { logoutSuccess } from '../redux/authSlice';
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
     height: 60px;
@@ -91,6 +92,10 @@ const Navbar = () => {
         logOut(dispatch, navigate, id, accessToken, axiosJWT);
     }
 
+    const quantity = useSelector(state => state.cart.quantity)
+    console.log(quantity)
+
+
 
     return (
         <Container>
@@ -130,13 +135,13 @@ const Navbar = () => {
                         </>
                     )}
 
-                    <MenuItem>
-                        <Link to={"/cart"} style={{ textDecorationLine: "none" }} >
-                            <Badge badgeContent={4} color="primary">
+                    <Link to={"/cart"} style={{ textDecorationLine: "none" }} >
+                        <MenuItem>
+                            <Badge badgeContent={quantity} color="primary">
                                 <ShoppingCartOutlinedIcon />
                             </Badge>
-                        </Link>
-                    </MenuItem>
+                        </MenuItem>
+                    </Link>
                 </Right>
             </Wrapper>
         </Container>

@@ -14,19 +14,19 @@ const Datatable = () => {
     const actionColumn = [
         {
             field: "action",
-            headerName: "Action",
+            headerName: "Hành động",
             width: 200,
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
                         <Link to="/users/test" style={{ textDecoration: "none" }}>
-                            <div className="viewButton">View</div>
+                            <div className="viewButton">Xem</div>
                         </Link>
                         <div
                             className="deleteButton"
                             onClick={() => handleDelete(params.row.id)}
                         >
-                            Delete
+                            Xoá
                         </div>
                     </div>
                 );
@@ -36,9 +36,9 @@ const Datatable = () => {
     return (
         <div className="datatable">
             <div className="datatableTitle">
-                Add New User
+                Danh sách người dùng
                 <Link to="/users/new" className="link">
-                    Add New
+                    Thêm 
                 </Link>
             </div>
             <DataGrid

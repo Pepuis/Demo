@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {mobile} from '../Responsive'
+import { mobile } from '../Responsive'
 
 const Container = styled.div`
     width: 100%;

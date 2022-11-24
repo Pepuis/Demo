@@ -1,29 +1,29 @@
-import Featured from "../../components/featured/Featured"
-import Chart from "../../components/chart/Chart"
-import Navbar from "../../components/navbar/Navbar"
-import Sidebar from "../../components/sidebar/Sidebar"
+import Featured from "../../components/Featured"
+import Chart from "../../components/Chart"
+import Navbar from "../../components/Navbar"
+import Sidebar from "../../components/Sidebar"
 import Widget from "../../components/widget/Widget"
 import "./home.scss"
 import Table from "../../components/table/Table"
 const Home = () => {
     return (
         <div className="home">
-            <Sidebar/>
+            <Sidebar />
             <div className="homeContainer">
-                <Navbar/>
+                <Navbar />
                 <div className="widgets">
-                    <Widget type="user"/>
-                    <Widget type="order"/>
-                    <Widget type="earning"/>
-                    <Widget type="balance"/>
+                    <Widget type="user" />
+                    <Widget type="order" />
+                    <Widget type="earning" />
+                    <Widget type="balance" />
                 </div>
                 <div className="charts">
-                    <Featured/>
-                    <Chart/>
+                    <Featured />
+                    <Chart />
                 </div>
                 <div className="listContainer">
                     <div className="listTitle">Latest Trasactions</div>
-                    <Table/>
+                    <Table />
                 </div>
             </div>
         </div>

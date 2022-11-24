@@ -48,7 +48,7 @@ const CategoryItem = ({ item }) => {
 
   return (
     <Container>
-      <Link to={`/products/${item.cat}`} style={{ textDecorationLine: "none" }}>
+      <Link to={`/products/${item.title}`} style={{ textDecorationLine: "none" }}>
         <Image src={item.img} />
         <Info>
           <Title>{item.title}</Title>

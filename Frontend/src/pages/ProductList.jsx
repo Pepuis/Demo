@@ -6,7 +6,8 @@ import Footer from "../components/Footer";
 import Products from "../components/Products";
 import { mobile } from "../Responsive";
 import Navbar from './../components/Navbar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Container = styled.div``;
 const Title = styled.h1`
@@ -43,11 +44,13 @@ const Option = styled.option`
 const ProductList = () => {
     const location = useLocation();
 
-    const cat = location.pathname.split("/")[2];
+    const title = location.pathname.split("/")[2];
 
     const [filters, setFilters] = useState({});
 
     const [sort, setSort] = useState("Mới nhất");
+
+    const [cate, setCate] = useState([]);
 
     const handleFilters = (e) => {
         const value = e.target.value;
@@ -56,20 +59,40 @@ const ProductList = () => {
             [e.target.name]: value,
         });
     };
+    useEffect(() => {
+        const getCate = async () => {
+            try {
+                const res = await axios.get("http://localhost:8000/v1/cate"
+                );
+                setCate(res.data);
+                //console.log(res);
+            } catch (err) {
+
+            }
+        };
+        getCate()
+    }, [])
 
     return (
         <Container>
             <Navbar />
             <Announcement />
-            <Title>{cat}</Title>
+            <Title>{title}</Title>
             <FilterContainer>
+
                 <Filter>
                     <FilterText>Lọc sản phẩm:</FilterText>
-                    <Select name="loai" onChange={handleFilters}>
-                        <Option disabled>Loại</Option>
-                        <Option>Sinh nhat</Option>
-                        <Option>20/10</Option>
+                    <Select name="title" onChange={handleFilters}>
+                        <Option disabled selected>Loại</Option>
+                        {cate.map((item) => (
+                            <Option>{item.title}</Option>
+                        ))}
                     </Select>
+                    {/* <Select name="size" onChange={handleFilters}>
+                        <Option disabled selected>Size</Option>
+                        <Option>M</Option>
+                        <Option>L</Option>
+                    </Select> */}
                 </Filter>
                 <Filter>
                     <FilterText>Sắp xếp:</FilterText>
@@ -80,7 +103,7 @@ const ProductList = () => {
                     </Select>
                 </Filter>
             </FilterContainer>
-            <Products cat={cat} filters={filters} sort={sort} />
+            <Products title={title} filters={filters} sort={sort} />
             <CSKH />
             <Footer />
         </Container>

@@ -6,6 +6,12 @@ import Footer from './../components/Footer';
 import Navbar from './../components/Navbar';
 import { Remove } from '@material-ui/icons';
 import { mobile } from '../Responsive';
+import { useLocation } from "react-router-dom";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { publicRequest } from '../requestMethod';
+import { addProduct } from '../redux/cartRedux';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div`
     
@@ -25,7 +31,7 @@ const Image = styled.img`
     width: 100%; 
     height: 90vh;
     object-fit: cover;
-    ${mobile({ height:"40vh" })}
+    ${mobile({ height: "40vh" })}
 `;
 
 const InfoContainer = styled.div`
@@ -122,43 +128,82 @@ const Button = styled.button`
 
 
 const Product = () => {
+
+    const location = useLocation();
+    const id = location.pathname.split("/")[2];
+
+    const [product, setProduct] = useState({});
+    const [quantity, setQuantity] = useState(1);
+
+    // const [color, setColor] = useState("");
+    // const [size, setSize] = useState("");
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const res = await publicRequest.get("/product/find/" + id)
+                setProduct(res.data);
+            } catch {
+
+            }
+        };
+        getProduct()
+    }, [id]);
+
+    const handleQuantity = (type) => {
+        if (type === "dec") {
+            quantity > 1 && setQuantity(quantity - 1);
+        } else {
+            setQuantity(quantity + 1);
+        }
+    }
+
+    const handleClick = () => {
+        //update cart
+        dispatch(
+            addProduct({ ...product, quantity })
+        )
+    };
+
     return (
         <Container>
             <Navbar />
             <Announcement />
             <Wrapper>
                 <ImgContainer>
-                    <Image src="https://images.fpt.shop/unsafe/fit-in/800x800/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2019/9/11/637037652463173144_11-xanh.png" />
+                    <Image src={product.img} />
                 </ImgContainer>
                 <InfoContainer>
-                    <Title>IPHONE 13 PROMAX</Title>
-                    <Desc>Giảm 20%</Desc>
-                    <Price>$1120</Price>
-                    <FilerContainer>
+                    <Title>{product.title}</Title>
+                    <Desc>{product.desc}</Desc>
+                    <Price>{product.price} VNĐ</Price>
+                    {/* <FilerContainer>
                         <Filter>
                             <FilterTitle>Màu</FilterTitle>
-                            <FilterColor color="black" />
-                            <FilterColor color="darkblue" />
-                            <FilterColor color="gray" />
+                            {product.color?.map((e) => (
+                                <FilterColor color={e} key={e} onClick={() => setColor(e)} />
+                            ))}
+
+
                         </Filter>
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
-                            <FilterSize>
-                                <FilterSizeOption>64GB</FilterSizeOption>
-                                <FilterSizeOption>128GB</FilterSizeOption>
-                                <FilterSizeOption>256GB</FilterSizeOption>
-                                <FilterSizeOption>512GB</FilterSizeOption>
-                                <FilterSizeOption>1T</FilterSizeOption>
+                            <FilterSize onChange={(e) => setSize(e.target.value)}>
+                                {product.size?.map((s) => (
+                                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                                ))}
                             </FilterSize>
                         </Filter>
-                    </FilerContainer>
+                    </FilerContainer> */}
                     <AddContainer>
                         <AmountContainer>
-                            <Remove />
-                            <Amount>1</Amount>
-                            <Add />
+                            <Remove onClick={() => handleQuantity("dec")} />
+                            <Amount>{quantity}</Amount>
+                            <Add onClick={() => handleQuantity("inc")} />
                         </AmountContainer>
-                        <Button>Thêm vô giỏ hàng</Button>
+                        <Button onClick={handleClick}>Thêm vô giỏ hàng</Button>
                     </AddContainer>
                 </InfoContainer>
             </Wrapper>
