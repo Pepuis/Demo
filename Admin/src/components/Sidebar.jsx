@@ -112,29 +112,29 @@ const Sidebar = () => {
     return (
         <Container>
             <SidebarTop >
-                <Link to="/" style={{ textDecoration: "none" }}>
-                    <Logo>admin</Logo>
+                <Link to="/admin" style={{ textDecoration: "none" }}>
+                    <Logo>Smart 4.0</Logo>
                 </Link>
             </SidebarTop>
             <Hr />
             <SidebarCenter >
                 <Ul>
-                    <Title>MAIN</Title>
-                    <Link to={"/"} style={{ textDecoration: "none" }}>
+                    <Title>Tổng quan</Title>
+                    <Link to={"/admin"} style={{ textDecoration: "none" }}>
                         <Li>
                             <Icon>
                                 <DashboardIcon />
                             </Icon>
-                            <ItemSidebar>Dashboard</ItemSidebar>
+                            <ItemSidebar>Doanh thu</ItemSidebar>
                         </Li>
                     </Link>
-                    <Title>LISTS</Title>
+                    <Title>Danh sách</Title>
                     <Link to="/Users" style={{ textDecoration: "none" }}>
                         <Li>
                             <Icon>
                                 <AccountCircleOutlinedIcon />
                             </Icon>
-                            <ItemSidebar>Users</ItemSidebar>
+                            <ItemSidebar>Khách hàng</ItemSidebar>
                         </Li>
                     </Link>
                     <Link to="/Products" style={{ textDecoration: "none" }}>
@@ -142,65 +142,65 @@ const Sidebar = () => {
                             <Icon>
                                 <InventorySharpIcon />
                             </Icon>
-                            <ItemSidebar>Products</ItemSidebar>
+                            <ItemSidebar>Sản phẩm</ItemSidebar>
                         </Li>
                     </Link>
                     <Li>
                         <Icon>
                             <BorderColorIcon />
                         </Icon>
-                        <ItemSidebar>Order</ItemSidebar>
+                        <ItemSidebar>Đơn hàng</ItemSidebar>
                     </Li>
                     <Li>
                         <Icon>
                             <LocalShippingIcon />
                         </Icon>
-                        <ItemSidebar>Delivery</ItemSidebar>
+                        <ItemSidebar>Vận chuyển</ItemSidebar>
                     </Li>
-                    <Title>USEFUL</Title>
+                    <Title>Tiện ích</Title>
                     <Li>
                         <Icon>
                             <QueryStatsSharpIcon />
                         </Icon>
-                        <ItemSidebar>Stats</ItemSidebar>
+                        <ItemSidebar>Thống kê</ItemSidebar>
                     </Li>
                     <Li>
                         <Icon>
                             <NotificationsNoneOutlinedIcon />
                         </Icon>
-                        <ItemSidebar>Notifications</ItemSidebar>
+                        <ItemSidebar>Thông báo</ItemSidebar>
                     </Li>
-                    <Title>SERVICE</Title>
+                    <Title>Dịch vụ</Title>
                     <Li>
                         <Icon>
                             <SettingsSystemDaydreamOutlinedIcon />
                         </Icon>
-                        <ItemSidebar>System Health</ItemSidebar>
+                        <ItemSidebar>Chăm sóc khách hàng</ItemSidebar>
                     </Li>
                     <Li>
                         <Icon>
                             <PsychologyOutlinedIcon />
                         </Icon>
-                        <ItemSidebar>Logs</ItemSidebar>
+                        <ItemSidebar>Nhật ký</ItemSidebar>
                     </Li>
                     <Li>
                         <Icon>
                             <SettingsIcon />
                         </Icon>
-                        <ItemSidebar>Settings</ItemSidebar>
+                        <ItemSidebar>Cài đặt</ItemSidebar>
                     </Li>
-                    <Title>USER</Title>
+                    <Title>Tài khoản</Title>
                     <Li>
                         <Icon>
                             <AccountBoxOutlinedIcon />
                         </Icon>
-                        <ItemSidebar>Profile</ItemSidebar>
+                        <ItemSidebar>Trang cá nhân</ItemSidebar>
                     </Li>
                     <Li>
                         <Icon>
                             <LogoutOutlinedIcon />
                         </Icon>
-                        <ItemSidebar>Logout</ItemSidebar>
+                        <ItemSidebar>Đăng xuất</ItemSidebar>
                     </Li>
                 </Ul>
             </SidebarCenter>

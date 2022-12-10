@@ -93,11 +93,7 @@ const Login = () => {
                 <Form onSubmit={handleLogin} disabled={isFetching}>
                     <Input placeholder="Tài khoản" onChange={(e) => setUsername(e.target.value)} />
                     <Input type="password" placeholder="Mật khẩu" onChange={(e) => setPassword(e.target.value)} />
-                    <Button >
-                        {/* <Link to={"/Home"} style={{ textDecorationLine: "none", color: "white" }}> */}
-                        Đăng nhập
-                        {/* </Link> */}
-                    </Button>
+                    <Button >Đăng nhập</Button>
                     {error && <Error>Sai tài khoản hoặc mật khẩu</Error>}
                     <Link style={{ textDecorationLine: "none", color: "black" }}>
                         <Links>

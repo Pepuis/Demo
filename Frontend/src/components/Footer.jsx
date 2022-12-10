@@ -1,6 +1,7 @@
 import { Facebook, GitHub, Instagram, MailOutline, Phone, Room } from "@material-ui/icons";
 import styled from "styled-components"
 import { mobile } from "../Responsive";
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     display: flex;
@@ -52,7 +53,7 @@ const List = styled.ul`
     margin: 0;
     padding: 0;
     list-style: none;
-    display: flex;
+    //display: flex;
     flex-wrap: wrap;
 `;
 
@@ -84,35 +85,42 @@ const Footer = () => {
                 <Desc>Tỉa Hứa Hoàng Vũ</Desc>
                 <Desc>Trương Vĩnh Thành</Desc>
                 <SocialContainer>
-                    <SocialIcon color="3B5999">
-                        <Facebook />
-                    </SocialIcon>
+                    <a href="https://www.facebook.com/Chivas2707">
+                        <SocialIcon color="3B5999">
+                            <Facebook />
+                        </SocialIcon>
+                    </a>
                     <SocialIcon color="E4405F">
                         <Instagram />
                     </SocialIcon>
-                    <SocialIcon color="000000">
-                        <GitHub />
-                    </SocialIcon>
+                    <a href="https://github.com/Chivas277/flower-garden">
+                        <SocialIcon color="000000">
+                            <GitHub />
+                        </SocialIcon>
+                    </a>
                 </SocialContainer>
             </Left>
             <Center>
                 <Title>Liên kết hữu ích</Title>
                 <List>
-                    <ListItem>Trang chủ</ListItem>
-                    <ListItem>Giỏ hàng</ListItem>
-                    <ListItem>Samsung</ListItem>
-                    <ListItem>Iphone</ListItem>
-                    <ListItem>Oppo</ListItem>
-                    <ListItem>Theo dõi đơn hàng</ListItem>
-                    <ListItem>Danh sách yêu thích</ListItem>
+                    <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
+                        <ListItem>Trang chủ</ListItem>
+                    </Link>
+                    <Link to={"/cart"} style={{ textDecoration: "none", color: "black" }}>
+                        <ListItem>Giỏ hàng</ListItem>
+                    </Link>
+                    <Link to={"/products"} style={{ textDecoration: "none", color: "black" }}>
+                        <ListItem>Hoa hồng</ListItem>
+                        <ListItem>Cẩm tú cầu</ListItem>
+                    </Link>
                 </List>
             </Center>
             <Right>
                 <Title>Liên hệ</Title>
-                <ContactItem><Room style={{marginRight:"10px"}}/>180 Cao Lỗ, F4, Q8</ContactItem>
+                <ContactItem><Room style={{ marginRight: "10px" }} />180 Cao Lỗ, F4, Q8</ContactItem>
                 <ContactItem><Phone style={{ marginRight: "10px" }} />0707697593</ContactItem>
                 <ContactItem><MailOutline style={{ marginRight: "10px" }} />DH51902793@stuent.stu.edu.vn</ContactItem>
-                <Payment src="https://i.ibb.co/Qfvn4z6/payment.png/"/>
+                <Payment src="https://i.ibb.co/Qfvn4z6/payment.png/" />
             </Right>
         </Container>
     )

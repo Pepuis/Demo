@@ -10,7 +10,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { userRequest } from "../requestMethod";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -165,6 +165,7 @@ const Cart = () => {
     const cart = useSelector((state) => state.cart);
     const [stripeToken, setStripeToken] = useState(null);
     const navigate = useNavigate();
+    const [quantity, setQuantity] = useState(1);
 
     const onToken = (token) => {
         setStripeToken(token);
@@ -186,6 +187,15 @@ const Cart = () => {
         stripeToken && makeRequest();
     }, [stripeToken, cart.total, navigate, cart]);
     //console.log(stripeToken);
+
+    const handleQuantity = (type) => {
+        if (type === "dec") {
+            quantity > 1 && setQuantity(quantity - 1);
+        } else {
+            setQuantity(quantity + 1);
+        }
+    }
+
     return (
         <Container>
             <Navbar />
@@ -193,9 +203,21 @@ const Cart = () => {
             <Wrapper>
                 <Title>Giỏ hàng của bạn</Title>
                 <Top>
-                    <TopButton>Tiếp tục mua sắm</TopButton>
-
-                    <TopButton type="filled">Thanh toán ngay</TopButton>
+                    <Link to={"/products"}>
+                        <TopButton>Tiếp tục mua sắm</TopButton>
+                    </Link>
+                    <StripeCheckout
+                        name="Flower Store"
+                        image="https://avatars.githubusercontent.com/u/1486366?v=4"
+                        billingAddress
+                        shippingAddress
+                        description={`Số tiền bạn cần thanh toán là $${cart.total * quantity}`}
+                        amount={cart.total * 100}
+                        token={onToken}
+                        stripeKey={KEY}
+                    >
+                        <TopButton type="filled">Thanh toán ngay</TopButton>
+                    </StripeCheckout>
                 </Top>
                 <Bottom>
                     <Info>
@@ -211,11 +233,11 @@ const Cart = () => {
                                 </ProductDetail>
                                 <PriceDetail>
                                     <ProductAmountContainer>
-                                        <Add />
-                                        <ProductAmount>{product.quantity}</ProductAmount>
-                                        <Remove />
+                                        <Remove onClick={() => handleQuantity("dec")} />
+                                        <ProductAmount>{quantity}</ProductAmount>
+                                        <Add onClick={() => handleQuantity("inc")} />
                                     </ProductAmountContainer>
-                                    <ProductPrice>{product.price * product.quantity} VNĐ</ProductPrice>
+                                    <ProductPrice>{product.price * quantity} VNĐ</ProductPrice>
                                 </PriceDetail>
                             </Product>
                         ))}
@@ -226,27 +248,27 @@ const Cart = () => {
                         <SummaryTitle>Chi tiết hoá đơn</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Tổng tiền: </SummaryItemText>
-                            <SummaryItemPrice>{cart.total} VNĐ</SummaryItemPrice>
+                            <SummaryItemPrice>{cart.total * quantity} VNĐ</SummaryItemPrice>
                         </SummaryItem>
-                        <SummaryItem>
+                        {/* <SummaryItem>
                             <SummaryItemText>Giảm: </SummaryItemText>
                             <SummaryItemPrice>$30</SummaryItemPrice>
-                        </SummaryItem>
+                        </SummaryItem> */}
                         <SummaryItem type="total">
                             <SummaryItemText >Cần thanh toán: </SummaryItemText>
-                            <SummaryItemPrice>{cart.total} VNĐ</SummaryItemPrice>
+                            <SummaryItemPrice>{cart.total * quantity} VNĐ</SummaryItemPrice>
                         </SummaryItem>
                         <StripeCheckout
                             name="Flower Store"
                             image="https://avatars.githubusercontent.com/u/1486366?v=4"
                             billingAddress
                             shippingAddress
-                            description={`Số tiền bạn cần thanh toán là $${cart.total}`}
+                            description={`Số tiền bạn cần thanh toán là $${cart.total * quantity}`}
                             amount={cart.total * 100}
                             token={onToken}
                             stripeKey={KEY}
                         >
-                            <Button>CHECKOUT NOW</Button>
+                            <Button>Thanh toán ngay</Button>
                         </StripeCheckout>
                     </Summary>
                 </Bottom>

@@ -1,6 +1,6 @@
-import Home from "./pages/home/Home";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
-import List from "./pages/list/List";
+import List from "./pages/List";
 import Edit from "./pages/product/Product";
 import New from "./pages/newProduct/newproduct";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -16,8 +16,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route index element={<Login />} />
+            <Route path="/admin" element={<Home />} />
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Edit />} />

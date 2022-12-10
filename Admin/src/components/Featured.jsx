@@ -86,37 +86,37 @@ const featured = () => {
     return (
         <Container>
             <Top>
-                <Title>Total revenue</Title>
+                <Title>Tổng doanh thu</Title>
                 <MoreVertOutlinedIcon fontSize="small" />
             </Top>
             <Bottom>
                 <BottomChart>
                     <CircularProgressbar value={70} text={"70%"} strokeWidth={5} />
                 </BottomChart>
-                <TitleBottom>Total sales made toay</TitleBottom>
-                <AmountBottom>$420</AmountBottom>
-                <DescBottom>Previous transactions processing</DescBottom>
+                <TitleBottom>Tổng doanh thu hôm nay</TitleBottom>
+                <AmountBottom>40.000.000 VNĐ</AmountBottom>
+                <DescBottom>Doanh thu trước đó</DescBottom>
 
                 <Summary>
                     <ItemSummary>
-                        <ItemTitle>Target</ItemTitle>
+                        <ItemTitle>Mục tiêu</ItemTitle>
                         <ItemResult className="negative">
                             <KeyboardArrowDownIcon fontSize="small" />
-                            <ResultAmount >$12.5k</ResultAmount>
+                            <ResultAmount >500.000.000 VNĐ</ResultAmount>
                         </ItemResult>
                     </ItemSummary>
                     <ItemSummary>
-                        <ItemTitle>Last Week</ItemTitle>
+                        <ItemTitle>Tuần trước</ItemTitle>
                         <ItemResult className="positive">
                             <KeyboardArrowUpOutlinedIcon fontSize="small" />
-                            <ResultAmount>$12.4k</ResultAmount>
+                            <ResultAmount>45.000.000 VNĐ</ResultAmount>
                         </ItemResult>
                     </ItemSummary>
                     <ItemSummary>
-                        <ItemTitle>Last Month</ItemTitle>
+                        <ItemTitle>Tháng trước</ItemTitle>
                         <ItemResult className="positive">
                             <KeyboardArrowUpOutlinedIcon fontSize="small" />
-                            <ResultAmount >$12.4k</ResultAmount>
+                            <ResultAmount >1.000.000.000 VNĐ</ResultAmount>
                         </ItemResult>
                     </ItemSummary>
                 </Summary>

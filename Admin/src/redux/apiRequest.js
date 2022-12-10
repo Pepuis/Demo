@@ -23,7 +23,7 @@ export const loginUser = async (user, dispatch, navigate) => {
     // .then(res => console.log("res: ", res))
     // .then(err => console.log(err));
     dispatch(loginSuccess(res.data));
-    navigate("/");
+    navigate("/admin");
   } catch (err) {
     dispatch(loginFailed());
   }
@@ -42,8 +42,8 @@ export const getProducts = async (dispatch) => {
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
   try {
-    // const res = await userRequest.delete(`/products/${id}`);
-    dispatch(deleteProductSuccess(id));
+    const res = await userRequest.delete(`/product/${id}`);
+    dispatch(deleteProductSuccess(res));
   } catch (err) {
     dispatch(deleteProductFailure());
   }

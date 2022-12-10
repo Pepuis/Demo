@@ -1,13 +1,76 @@
-import Navbar from "../../components/Navbar"
-import Sidebar from "../../components/Sidebar"
-import "./list.scss"
+import Navbar from "../components/Navbar"
+import Sidebar from "../components/Sidebar"
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { deleteProduct, getProducts } from './../../redux/apiRequest';
+import { deleteProduct, getProducts } from './../redux/apiRequest';
 import { DeleteOutline } from "@material-ui/icons";
 import { DataGrid } from '@material-ui/data-grid';
+import styled from 'styled-components';
+
+const Container = styled.div`
+    display: flex;
+    width: 100%;        
+`
+
+const ListContainer = styled.div`
+    flex: 6;
+`
+
+const Datatable = styled.div`
+    height: 600px;
+    padding: 20px;
+`
+
+const DatatableTitle = styled.div`
+    width: 100%;
+    font-size: 24px;
+    color: gray;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
+const Links = styled.div`
+    text-decoration: none;
+    color: green;
+    font-size: 16px;
+    font-weight: 400;
+    border: 1px solid green;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+`
+
+const ProductList = styled.div`
+    flex: 4;
+`
+
+const ProductListItem = styled.div`
+    display: flex;
+    align-items: center;  
+`
+
+const ProductListImg = styled.img`
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+`
+
+const ProductListEdit = styled.button`
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
+`
+
 const List = () => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
@@ -28,10 +91,10 @@ const List = () => {
             width: 250,
             renderCell: (params) => {
                 return (
-                    <div className="productListItem">
-                        <img className="productListImg" src={params.row.img} alt="" />
+                    <ProductListItem >
+                        <ProductListImg src={params.row.img} alt="" />
                         {params.row.title}
-                    </div>
+                    </ProductListItem>
                 );
             },
         }, { field: "categories", headerName: "Loại", width: 190 },
@@ -49,10 +112,12 @@ const List = () => {
                 return (
                     <>
                         <Link to={`/products/` + params.row._id}>
-                            <button className="productListEdit">Edit</button>
+                            <ProductListEdit >Edit</ProductListEdit>
                         </Link>
-                        <DeleteOutline
-                            className="productListDelete"
+                        <DeleteOutline style={{
+                            color: "red",
+                            cursor: "pointer"
+                        }}
                             onClick={() => handleDelete(params.row._id)}
                         />
                     </>
@@ -60,20 +125,23 @@ const List = () => {
             },
         },
     ];
-    return (
-        <div className="list">
-            <Sidebar />
-            <div className="listContainer">
-                <Navbar />
-                <div className="datatable">
-                    <div className="datatableTitle">
-                        Danh sách người dùng
-                        <Link to="/products/new" className="link">
-                            Thêm
-                        </Link>
-                    </div>
-                    <div className="productList">
 
+
+    return (
+        <Container >
+            <Sidebar />
+            <ListContainer>
+                <Navbar />
+                <Datatable>
+                    <DatatableTitle>
+                        Danh sách người dùng
+                        <Link to="/products/new" style={{ textDecoration: "none" }}>
+                            <Links>
+                                Thêm
+                            </Links>
+                        </Link>
+                    </DatatableTitle>
+                    <ProductList>
                         <DataGrid
                             rows={products}
                             disableSelectionOnClick
@@ -84,10 +152,10 @@ const List = () => {
                             checkboxSelection
                             autoHeight
                         />
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </ProductList>
+                </Datatable>
+            </ListContainer>
+        </Container>
     )
 }
 

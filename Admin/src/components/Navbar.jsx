@@ -93,7 +93,7 @@ const Navbar = () => {
             <Icon>
               <LanguageOutlinedIcon />
             </Icon>
-            English
+            Tiếng việt
           </Item>
           <Item >
             <Icon>

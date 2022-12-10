@@ -1,6 +1,6 @@
 import "./newProduct.css";
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getStorage,
   ref,
@@ -12,6 +12,16 @@ import app from "../../firebase";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import { addProduct } from "../../redux/apiRequest";
+import styled from 'styled-components';
+
+const Error = styled.span`
+    color:red;
+`;
+
+const Success = styled.span`
+    color:green;
+`;
+
 export default function NewProduct() {
 
   const [inputs, setInputs] = useState({});
@@ -56,7 +66,7 @@ export default function NewProduct() {
         }
       },
       (error) => {
-        // Handle unsuccessful uploads
+        //console.log(error);
       },
       () => {
         // Handle successful uploads on complete
@@ -71,6 +81,8 @@ export default function NewProduct() {
 
   }
 
+  const { isFetching, error } = useSelector((state) => state.product);
+
   return (
     <div className="newProduct">
       <Sidebar />
@@ -84,25 +96,26 @@ export default function NewProduct() {
           </div>
           <div className="addProductItem">
             <label>Tên sản phẩm</label>
-            <input name="title" type="text" placeholder="" onChange={handleInputs} />
+            <input id="title" name="title" type="text" placeholder="tên sản phẩm" onChange={handleInputs} />
           </div>
           <div className="addProductItem">
             <label>Loại</label>
-            <input type="text" placeholder="" onChange={handleCat} />
+            <input type="text" placeholder="loại" onChange={handleCat} />
           </div>
           <div className="addProductItem">
             <label>Giá</label>
-            <input name="price" type="number" placeholder="" onChange={handleInputs} />
+            <input name="price" type="number" placeholder="giá" onChange={handleInputs} />
           </div>
           <div className="addProductItem">
             <label>Mô tả</label>
-            <input name="desc" type="text" placeholder="" onChange={handleInputs} />
+            <input name="desc" type="text" placeholder="mô tả" onChange={handleInputs} />
           </div>
           <div className="addProductItem">
             <label>Tồn kho</label>
-            <input name="inStock" type="text" placeholder="123" onChange={handleInputs} />
+            <input name="inStock" type="text" placeholder="số lượng" onChange={handleInputs} />
           </div>
-          <button onChange={handleClick} className="addProductButton">Thêm</button>
+          <button onClick={handleClick} disabled={isFetching} className="addProductButton">Thêm</button>
+          {(error && <Error>Thêm không thành công</Error>) || (!error && <Success>Thêm thành công</Success>)}
         </form>
       </div>
     </div>

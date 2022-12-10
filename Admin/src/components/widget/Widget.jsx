@@ -8,34 +8,34 @@ const Widget = ({ type }) => {
     let data;
 
     //tam thoi
-    const amount = 100;
+    const amount = 10000;
     const diff = 20;
 
     switch (type) {
         case "user":
             data = {
-                title: "USERS",
+                title: "Khách hàng",
                 isMoney: false,
-                link: "See all users",
-                icon:(
-                    <PersonOutlineIcon className="icon" style={{ 
-                        color: "crimson", 
+                link: "Xem tất cả khách hàng",
+                icon: (
+                    <PersonOutlineIcon className="icon" style={{
+                        color: "crimson",
                         backgroundColor: " rgba(255, 0, 0, 0.2)",
-                    }} 
+                    }}
                     />
                 ),
             };
             break;
         case "order":
             data = {
-                title: "ORDER",
+                title: "Đơn hàng",
                 isMoney: false,
-                link: "View all orders",
-                icon:(
-                    <ShoppingCartOutlinedIcon className="icon" 
-                    style={{
-                        backgroundColor: " rgba(218, 165, 32, 0.2)",
-                        color: "goldenrod",
+                link: "Xem tất cả đơn hàng",
+                icon: (
+                    <ShoppingCartOutlinedIcon className="icon"
+                        style={{
+                            backgroundColor: " rgba(218, 165, 32, 0.2)",
+                            color: "goldenrod",
                         }}
                     />
                 ),
@@ -43,14 +43,14 @@ const Widget = ({ type }) => {
             break;
         case "earning":
             data = {
-                title: "EARNING",
+                title: "Doanh thu",
                 isMoney: true,
-                link: "View net earning",
-                icon:(
-                    <MonetizationOnOutlinedIcon className="icon" 
-                    style={{
-                        backgroundColor: " rgba(0, 128, 0, 0.2)",
-                        color: "green",
+                link: "Xem doanh thu",
+                icon: (
+                    <MonetizationOnOutlinedIcon className="icon"
+                        style={{
+                            backgroundColor: " rgba(0, 128, 0, 0.2)",
+                            color: "green",
                         }}
                     />
                 ),
@@ -61,13 +61,13 @@ const Widget = ({ type }) => {
                 title: "BALANCE",
                 isMoney: true,
                 link: "See detail",
-                icon:(
-                    <AccountBalanceWalletOutlinedIcon className="icon" 
-                    style={{
-                        color: "purple",
-                        backgroundColor: " rgba(128, 0, 128, 0.2)",
+                icon: (
+                    <AccountBalanceWalletOutlinedIcon className="icon"
+                        style={{
+                            color: "purple",
+                            backgroundColor: " rgba(128, 0, 128, 0.2)",
                         }}
-                    /> 
+                    />
                 ),
             };
             break;
@@ -82,7 +82,7 @@ const Widget = ({ type }) => {
         <div className="widget">
             <div className="left">
                 <div className="title">{data.title}</div>
-                <div className="counter">{data.isMoney && "$"} {amount}</div>
+                <div className="counter">{data.isMoney && "VNĐ"} {amount}</div>
                 <div className="link">{data.link}</div>
             </div>
             <div className="right">

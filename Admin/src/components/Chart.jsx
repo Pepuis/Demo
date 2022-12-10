@@ -15,18 +15,18 @@ const Title = styled.div`
 `;
 
 const data = [
-    { name: "January", Total: 1200 },
-    { name: "Febuary", Total: 2100 },
-    { name: "March", Total: 800 },
-    { name: "April", Total: 1600 },
-    { name: "May", Total: 900 },
-    { name: "June", Total: 1700 },
+    { name: "Tháng 6", Total: 40000000 },
+    { name: "Tháng 7", Total: 50000000 },
+    { name: "Tháng 8", Total: 45000000 },
+    { name: "Tháng 9", Total: 70000000 },
+    { name: "Tháng 10", Total: 35000000 },
+    { name: "Tháng 11", Total: 90000000 },
 
 ];
 const Chart = () => {
     return (
         <Container >
-            <Title>Last 6 Months (Doanh thu)</Title>
+            <Title>6 tháng vừa qua (Doanh thu)</Title>
             <ResponsiveContainer width="100%" aspect={2 / 1}>
                 <AreaChart width={730} height={250} data={data}
                     margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
