@@ -11,6 +11,11 @@ const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
 const cateRoute = require("./routes/category");
 //const { use } = require("./routes/auth");
+const MongoClient = require("mongodb").MongoClient;
+
+// MongoClient.connect(process.env.MONGODB_URL, () => {
+//   console.log("Đã kết nối tới database");
+// });
 
 dotenv.config();
 const app = express();

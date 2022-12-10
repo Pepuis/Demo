@@ -177,13 +177,14 @@ const Cart = () => {
                     tokenId: stripeToken.id,
                     amount: cart.total * 100,
                 });
-                navigate.push("/success", { 
-                    stripeData: res.data, 
-                    products: cart, });
+                navigate.push("/success", {
+                    stripeData: res.data,
+                    products: cart,
+                });
             } catch { }
         };
         stripeToken && makeRequest();
-    }, [stripeToken, cart.total, navigate]);
+    }, [stripeToken, cart.total, navigate, cart]);
     //console.log(stripeToken);
     return (
         <Container>
