@@ -84,13 +84,13 @@ const ProductName = styled.span`
 
 `;
 
-const ProductColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;    
-    background-color: ${props => props.color};
-    
-`;
+// const ProductColor = styled.div`
+//     width: 20px;
+//     height: 20px;
+//     border-radius: 50%;    
+//     background-color: ${props => props.color};
+
+// `;
 const PriceDetail = styled.div`
     flex: 1;
     display: flex;
@@ -188,6 +188,7 @@ const Cart = () => {
     }, [stripeToken, cart.total, navigate, cart]);
     //console.log(stripeToken);
 
+
     const handleQuantity = (type) => {
         if (type === "dec") {
             quantity > 1 && setQuantity(quantity - 1);
@@ -227,17 +228,17 @@ const Cart = () => {
                                     <Image src={product.img} />
                                     <Details>
                                         <ProductName><b>Tên sản phẩm:</b> {product.title}</ProductName>
-                                        {/* <ProductID><b>Mã:</b>123</ProductID> */}
-                                        <ProductColor color={product.color} />
+                                        {/* <ProductID><b>Mã:</b>123</ProductID> 
+                                        <ProductColor color={product.color} />*/}
                                     </Details>
                                 </ProductDetail>
                                 <PriceDetail>
                                     <ProductAmountContainer>
                                         <Remove onClick={() => handleQuantity("dec")} />
-                                        <ProductAmount>{quantity}</ProductAmount>
+                                        <ProductAmount>{product.quantity}</ProductAmount>
                                         <Add onClick={() => handleQuantity("inc")} />
                                     </ProductAmountContainer>
-                                    <ProductPrice>{product.price * quantity} VNĐ</ProductPrice>
+                                    <ProductPrice>{product.price * product.quantity} VNĐ</ProductPrice>
                                 </PriceDetail>
                             </Product>
                         ))}
@@ -246,35 +247,39 @@ const Cart = () => {
                     </Info>
                     <Summary>
                         <SummaryTitle>Chi tiết hoá đơn</SummaryTitle>
+
                         <SummaryItem>
                             <SummaryItemText>Tổng tiền: </SummaryItemText>
-                            <SummaryItemPrice>{cart.total * quantity} VNĐ</SummaryItemPrice>
+                            <SummaryItemPrice>{cart.total} VNĐ</SummaryItemPrice>
                         </SummaryItem>
+
                         {/* <SummaryItem>
                             <SummaryItemText>Giảm: </SummaryItemText>
                             <SummaryItemPrice>$30</SummaryItemPrice>
                         </SummaryItem> */}
                         <SummaryItem type="total">
                             <SummaryItemText >Cần thanh toán: </SummaryItemText>
-                            <SummaryItemPrice>{cart.total * quantity} VNĐ</SummaryItemPrice>
+                            <SummaryItemPrice>{cart.total} VNĐ</SummaryItemPrice>
                         </SummaryItem>
+
                         <StripeCheckout
                             name="Flower Store"
                             image="https://avatars.githubusercontent.com/u/1486366?v=4"
                             billingAddress
                             shippingAddress
-                            description={`Số tiền bạn cần thanh toán là $${cart.total * quantity}`}
+                            description={`Số tiền bạn cần thanh toán là $${cart.total}`}
                             amount={cart.total * 100}
                             token={onToken}
                             stripeKey={KEY}
                         >
                             <Button>Thanh toán ngay</Button>
                         </StripeCheckout>
+
                     </Summary>
                 </Bottom>
             </Wrapper>
             <Footer />
-        </Container>
+        </Container >
     )
 }
 

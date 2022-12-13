@@ -127,7 +127,7 @@ const Slider = () => {
                                     <Title>{item.title}</Title>
                                     <Desc>{item.desc}</Desc>
                                     <Button>
-                                        <Link to={"/ProductList"} style={{ textDecorationLine: "none" }}>
+                                        <Link to={"/products"} style={{ textDecorationLine: "none" }}>
                                             XEM NGAY
                                         </Link>
                                     </Button>
